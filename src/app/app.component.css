@@ -1,0 +1,62 @@
+.ng-invalid {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 29, 29, 0.6) !important;
+    border: 1px solid rgba(233, 29, 29, 0.6) !important;
+}
+
+.ng-untouched {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(209, 215, 219, 0.6) !important;
+    border: 1px solid rgba(209, 215, 219, 0.6) !important;
+ }
+ 
+.ng-dirty {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(233, 29, 29, 0.6) !important;
+    border: 1px solid rgba(233, 29, 29, 0.6) !important;
+}
+
+.ng-pristine {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(209, 215, 219, 0.6) !important;
+    border: 1px solid rgba(209, 215, 219, 0.6) !important;
+}
+
+.ng-valid {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(29, 141, 233, 0.6) !important;
+    border: 1px solid rgba(29, 141, 233, 0.6) !important;
+ }
+
+form {
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 15rem 20rem 40rem;
+    grid-template-rows: 3rem 3rem 3rem 3rem 3rem 3rem 3rem 3rem 3rem 3rem;
+    margin: 0 auto;
+}
+
+.header {
+    grid-column: 1 / 4;
+    margin: 0px;
+    padding: 0px;
+}
+
+.float-right {
+    padding-top: 10px !important;
+}
+
+form {
+    margin-top: 20px;
+    padding: 30px;
+}
+
+.message {
+    border: 1px solid green;
+}
+
+.validation {
+    color: red;
+    font-weight: bold;
+}

@@ -1,20 +1,199 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!doctype html>
+<html lang="en">
 
+<head>
+  <title>Account Information</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+</head>
+<!--{{ user | json }}-->
+
+
+
+
+<body>
+  <div class="container">
+    <div class="col-md-6 message" *ngIf='complete'>
+      <p>Thank you for registering with us {{userinfo.first_name}}. We just sent you an email confirmation to
+        <span>
+          <a>{{user.email}}</a>
+        </span> and we will send all mail to {{userinfo.street_address}} {{userinfo.city}}, {{userinfo.state}}.</p>
+      <br>
+      <p>Thank you and have a wonderful day.</p>
+    </div>
+    <h1>Account Information</h1>
+    <form #formdata='ngForm' (submit)="onSubmit(formdata)">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="firstname">*First Name:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="firstname" placeholder="Enter first name" required minlength="2" maxlength="24"
+              pattern="[a-zA-Z]+" [(ngModel)]='user.first_name' #firstname='ngModel'>
+          </div>
+          <div *ngIf='firstname.invalid && (firstname.dirty || firstname.touched)' class="col-md-4 validation">
+            <p *ngIf='firstname.errors.required'>First name is required.</p>
+            <p *ngIf='firstname.errors.minlength'>Minimum length is 2 characters.</p>
+            <p *ngIf='firstname.errors.pattern'>First name cannot contain any numbers or special characters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="lastname">*Last Name:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="lastname" placeholder="Enter last name" required minlength="2" maxlength="24"
+              pattern=[a-zA-Z-]+ [(ngModel)]='user.last_name' #lastname='ngModel'>
+          </div>
+          <div *ngIf='lastname.invalid && (lastname.dirty || lastname.touched)' class="col-md-4 validation">
+            <p *ngIf='lastname.errors.required'>Last name is required.</p>
+            <p *ngIf='lastname.errors.minlength'>Minimum length is 2 characters.</p>
+            <p *ngIf='lastname.errors.pattern'>Last name cannot contain any numbers or special characters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="email">*Email:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="email" class="form-control" name="email" placeholder="Enter email here" required pattern="[a-zA-Z.-_]+@[a-zA-Z.-_]+\.[a-z]{2,4}"
+              [(ngModel)]='user.email' #email='ngModel'>
+          </div>
+          <div *ngIf='email.invalid && (email.dirty || email.touched)' class="col-md-4 validation">
+            <p *ngIf='email.errors.required'>Email is required.</p>
+            <p *ngIf='email.errors.minlength'>Minimum length is 2 characters.</p>
+            <p *ngIf='email.errors.pattern'>Must be valid email.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="password">*Password:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="password" class="form-control" name="password" placeholder="Enter your password" required minlength="8" maxlength="24"
+              pattern="[a-zA-Z]+[0-9]+.*|[0-9]+[a-zA-Z].*" [(ngModel)]='user.password' #password='ngModel'>
+          </div>
+          <div *ngIf='password.invalid && (password.dirty || password.touched)' class="col-md-4 validation">
+            <p *ngIf='password.errors.required'>Email is required.</p>
+            <p *ngIf='password.errors.minlength'>Minimum length is 8 characters.</p>
+            <p *ngIf='password.errors.pattern'>Password must contain at least 1 letter and 1 number</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="confirmpw">*Confirm Password:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="password" class="form-control" name="confirmpw" placeholder="Confirm Password" required minlength="8" maxlength="24" pattern="{{password.value}}"
+              [(ngModel)]=user.confirmpassword #confirmpw='ngModel'>
+          </div>
+          <div *ngIf='confirmpw.invalid && (confirmpw.dirty || confirmpw.touched)' class="col-md-4 validation">
+            <p *ngIf='confirmpw.errors.required'>Email is required.</p>
+            <p *ngIf='confirmpw.errors.minlength'>Minimum length is 8 characters.</p>
+            <p *ngIf='confirmpw.errors.pattern'>Confirmation must match password provided.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="streetaddress">*Street Address:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="Street Address" placeholder="Enter your street address" required minlength="4"
+              maxlength="24" pattern="[0-9]+\s[a-zA-Z0-9]+.*" [(ngModel)]='user.street_address' #streetaddress='ngModel'>
+          </div>
+          <div *ngIf='streetaddress.invalid && (streetaddress.dirty || streetaddress.touched)' class="col-md-4 validation">
+            <p *ngIf='streetaddress.errors.required'>Street address is required</p>
+            <p *ngIf='streetaddress.errors.minlength'>Minimum length is 4 characters.</p>
+            <p *ngIf='streetaddress.errors.pattern'>Street address must be valid.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="unit">Unit/Apt No.:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="unit" placeholder="Enter unit or apt. no." [(ngModel)]='user.unit'>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="city">*City:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="city" placeholder="Enter name of city" required minlength="4" maxlength="24"
+              pattern="[a-zA-Z]+\s?[a-zA-Z\s]*?" [(ngModel)]='user.city' #city='ngModel'>
+          </div>
+          <div *ngIf='city.invalid && (city.dirty || city.touched)' class="col-md-4 validation">
+            <p *ngIf='city.errors.required'>City is required.</p>
+            <p *ngIf='city.errors.minlength'>Minimum length is 4 characters.</p>
+            <p *ngIf='city.errors.pattern'>City name cannot contain any numbers or special characters.</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="state">*State:</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" name="state" [(ngModel)]='user.state' required #selectstate='ngModel' minlength="4" minlength="2">
+              <option *ngFor="let state of states">{{state}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf='selectstate.invalid && (selectstate.dirty || selectstate.touched)' class="col-md-4 validation">
+              <p *ngIf='selectstate.errors.required'>State is required</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="float-right" for="lucky">*Feeling Lucky?</label>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-3">
+                <input type="radio" class="form-check-input" name="lucky" value=true checked [(ngModel)]='user.lucky'> Yes
+              </div>
+              <div class="col-md-3">
+                <input type="radio" class="form-check-input" name="lucky" value=false [(ngModel)]='user.lucky'> No
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="!formdata.valid">Register</button>
+      </div>
+
+    </form>
+  </div>
+</body>
+
+</html>
